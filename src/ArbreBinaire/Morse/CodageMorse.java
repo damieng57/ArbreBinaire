@@ -6,9 +6,8 @@ package ArbreBinaire.Morse;
  * de METZ - 2017/2018
  *
  */
-
-import ArbreBinaire.Arbre;
 import ArbreBinaire.Noeud;
+import ArbreBinaire.Arbre;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -19,31 +18,36 @@ import java.util.Scanner;
  */
 public class CodageMorse {
 
-	private static final Arbre ARBRE_CODAGE = new Arbre();
-	private static final Arbre ARBRE_DECODAGE = new Arbre();
+	private Noeud arbre_codage = null;
+	private Noeud arbre_decodage = null;
 
-	static {
+	public CodageMorse() {
+
+	}
+
+	{
 		// Chargement du fichier de codage Morse.txt
 		File fichier = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/ArbreBinaire/Morse/Morse.txt");
 
 		try (Scanner sc = new Scanner(fichier);) {
+			
+			String[] element = sc.nextLine().split("#");
+			arbre_codage = Arbre.creer(element[0].charAt(0), element[1], null, null);
+			arbre_decodage = Arbre.creer(Integer.parseInt(element[1]), element[0], null, null);
 
 			while (sc.hasNextLine()) {
-				String[] element = sc.nextLine().split("#");
-
-				ARBRE_CODAGE.ajoutNoeudRecursif(element[0].charAt(0), element[1], ARBRE_CODAGE.getRacine());
-
-				ARBRE_DECODAGE.ajoutNoeudRecursif(Integer.parseInt(element[1]), element[0], ARBRE_DECODAGE.getRacine());
-
+				element = sc.nextLine().split("#");
+				arbre_codage = Arbre.ajoutNoeudRecursif(element[0].charAt(0), element[1], arbre_codage);
+				arbre_decodage = Arbre.ajoutNoeudRecursif(Integer.parseInt(element[1]), element[0], arbre_decodage);
 			}
-
+			
 		} catch (FileNotFoundException ex) {
 			System.err.println("ex");
 		}
 
 	}
 
-	public static String codage(String texteClair) {
+	public String codage(String texteClair) {
 		// Le code morse ne faisant pas la différence entre
 		// majuscule et miniscule, on passe tout le texte fourni
 		// en majuscule
@@ -56,7 +60,7 @@ public class CodageMorse {
 				// On essaie de voir si le caractère est dans l'arbre et
 				// on récupère la valeur (code morse) dans temp
 				// (ex: pour 'G' on obtiendra "221" correspondant à --.).
-				String temp = ARBRE_CODAGE.chercher(texte.charAt(i)).getValeur();
+				String temp = Arbre.chercherRecursif(texte.charAt(i), arbre_codage).getValeur();
 
 				// On converti le code sous forme de . et -
 				for (int j = 0; j < temp.length(); j++) {
@@ -79,7 +83,7 @@ public class CodageMorse {
 		return resultat;
 	}
 
-	public static String decodage(String texteMorse) {
+	public String decodage(String texteMorse) {
 		// Récuperation du code Morse
 		// On coupe la chaine de caractère au niveau
 		// des espaces pour récupérer un tableau.
@@ -94,7 +98,7 @@ public class CodageMorse {
 			String temp = "";
 			// On décortique le code Morse pour revenir
 			// à un format composé de 1 et de 2.
-
+			
 			for (int i = 0; i < string.length(); i++) {
 				if (string.charAt(i) == '.') {
 					temp += "1";
@@ -107,7 +111,7 @@ public class CodageMorse {
 				// On essaie d'ajouter un caractère au resultat en effectuant une
 				// recherche dans l'arbre de décodage (on fourni une clé de la
 				// forme 1/2)
-				resultat += ARBRE_DECODAGE.chercher(Integer.parseInt(temp)).getValeur();
+				resultat += Arbre.chercherRecursif(Integer.parseInt(temp), arbre_decodage).getValeur();
 			} catch (NumberFormatException e) {
 				// Si la recherche échoue, c'est qu'il s'agit d'un espace utilisé
 				// pour la séparation des mots ou en substitue si le caractère ne
@@ -121,29 +125,28 @@ public class CodageMorse {
 		return resultat;
 	}
 
-	public static void TestCodage() {
-		
-		
+	public void TestCodage() {
+
 		// ------------ //
 		// Vérification //
 		// ------------ //
 		Noeud resultat;
-		//resultat = ARBRE_DECODAGE.chercher(121);
-		//System.out.println("Résultat pour la version itérative : "+resultat);
-		resultat = ARBRE_DECODAGE.chercherRecursif(121, ARBRE_DECODAGE.getRacine());
-		System.out.println("Résultat pour la version récursive : "+resultat);
+		CodageMorse testCodage = new CodageMorse();
 
-		resultat = ARBRE_CODAGE.chercher('F');
-		System.out.println(resultat);
+		resultat = Arbre.chercherRecursif(22222, arbre_decodage);
+		System.out.println("Recherche Morse -> Texte : " + resultat);
 
-		codage("Encore un autre test permettant de verifier que tout va bien.");
-		decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - .- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. .-.-.-");
-		System.out.println(ARBRE_DECODAGE.min());
-		System.out.println(ARBRE_DECODAGE.max());
-		System.out.println(ARBRE_CODAGE.min());
-		System.out.println(ARBRE_CODAGE.max());
+		resultat = Arbre.chercherRecursif('F', arbre_codage);
+		System.out.println("Recherche Texte -> Morse : " + resultat);
+
+		System.out.println(testCodage.codage("Encore un autre test permettant de verifier que tout va bien."));
+		System.out.println(testCodage.decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - .- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. .-.-.-"));
+		System.out.println(Arbre.minRecursif(arbre_codage));
+		System.out.println(Arbre.maxRecursif(arbre_codage));
+		System.out.println(Arbre.minRecursif(arbre_decodage));
+		System.out.println(Arbre.maxRecursif(arbre_decodage));
 		System.out.println("\n*************\n");
-		ARBRE_DECODAGE.Prefixe(ARBRE_DECODAGE.getRacine());
+		Arbre.Prefixe(arbre_codage);
 	}
 
 }

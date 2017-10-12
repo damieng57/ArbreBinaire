@@ -1,7 +1,6 @@
 package ArbreBinaire;
 
 import ArbreBinaire.Morse.CodageMorse;
-import ArbreBinaire.Ascii.CodageAscii;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +23,7 @@ public class Main {
 		// --------------------------------------//
 		
 		// Variable temporaire
+		CodageMorse nouveauCodage = new CodageMorse();
 		String texteMorse = "";
 
 		// Chargement du fichier à coder TexteClair.txt
@@ -37,13 +37,13 @@ public class Main {
 				String next = sc.nextLine();
 
 				// Code le texte en morse...
-				texteMorse = CodageMorse.codage(next);
+				texteMorse = nouveauCodage.codage(next);
 				// et l'enregistre dans un fichier
 				bw.write(texteMorse);
 
 				// Affichage
-				System.out.println(CodageMorse.codage(next));
-				System.out.println(CodageMorse.decodage(texteMorse));
+				System.out.println(nouveauCodage.codage(next));
+				System.out.println(nouveauCodage.decodage(texteMorse));
 			}
 
 		} catch (FileNotFoundException ex) {
@@ -53,46 +53,8 @@ public class Main {
 		}
 		
 		// Test
-		CodageMorse.TestCodage();
-
-		// --------------------------------------//
-		//			VERSION ASCII (fun)
-		// --------------------------------------//
-		System.out.println("");
-
-
-		// Variable temporaire
-		String texteAscii = "";
-
-		// Chargement du fichier à coder TexteClair.txt
-		File fichierEntreeAscii = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/ArbreBinaire/Ascii/TexteClair.txt");
-		// Définition du fichier accueillant le texte en Ascii
-		File fichierSortieAscii = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/ArbreBinaire/Ascii/TexteAscii.txt");
-
-		try (Scanner sc = new Scanner(fichierEntreeAscii); BufferedWriter bw = new BufferedWriter(new FileWriter(fichierSortieAscii))) {
-
-			while (sc.hasNext()) {
-				String next = sc.nextLine();
-
-				// Code le texte en Ascii...
-				texteAscii = CodageAscii.codage(next);
-				// et l'enregistre dans un fichier
-				bw.write(texteAscii);
-
-				// Affichage
-				System.out.println(CodageAscii.codage(next));
-				System.out.println(CodageAscii.decodage(texteAscii));
-			}
-
-		} catch (FileNotFoundException ex) {
-			System.err.println(ex);
-		} catch (IOException ex) {
-			System.err.println(ex);
-		}
-		
-		
-		// Test
-		CodageAscii.TestCodage();
+		nouveauCodage.TestCodage();
 
 	}
 }
+	

@@ -9,6 +9,7 @@ package ArbreBinaire;
 
 public class Noeud {
 
+
 	// Un noeud est caractérisé par sa clé et sa valeur
 	private int cle;
 	private String valeur;
@@ -18,19 +19,15 @@ public class Noeud {
 	private Noeud filsDroit;
 	
 	// En soi, un noeud est un arbre à deux niveaux (racine + 2 fils)
-
+	public Noeud() {
+	}
+	
 	// Constructeur du noeud pour la version recursive
 	public Noeud(int cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		this.cle = cle;
 		this.valeur = valeur;
 		this.filsGauche = filsGauche;
 		this.filsDroit = filsDroit;
-	}
-	
-	// Constructeur du noeud pour la version iterative
-	public Noeud(int cle, String valeur) {
-		this.cle = cle;
-		this.valeur = valeur;
 	}
 	
 	public static Noeud creer(int cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
@@ -65,26 +62,11 @@ public class Noeud {
 	}
 
 	/**
-	 * @param filsGauche the filsGauche to set
-	 */
-	public void setFilsGauche(Noeud filsGauche) {
-		this.filsGauche = filsGauche;
-	}
-
-	/**
 	 * @return the filsDroit
 	 */
 	public Noeud getFilsDroit() {
 		return filsDroit;
-	}
-
-	/**
-	 * @param filsDroit the filsDroit to set
-	 */
-	public void setFilsDroit(Noeud filsDroit) {
-		this.filsDroit = filsDroit;
-	}
-	
+	}	
 }
 
 	
