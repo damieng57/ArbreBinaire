@@ -8,6 +8,7 @@ package ArbreBinaire;
  */
 public class Arbre {
 
+
 	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		return Noeud.creer(cle, valeur, filsGauche, filsDroit);
 	}
