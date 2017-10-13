@@ -8,19 +8,19 @@ package ArbreBinaire;
  */
 public class Arbre {
 
-	public static Noeud creer(int cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
+	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		return Noeud.creer(cle, valeur, filsGauche, filsDroit);
 	}
 
 	//---------------------------
 	// Ajout noeud à la fin en version recursive
 	//---------------------------
-	public static Noeud ajoutNoeudRecursif(int cle, String valeur, Noeud parent) {
+	public static Noeud ajoutNoeudRecursif(String cle, String valeur, Noeud parent) {
 
 		if (parent == null) {
 			return Noeud.creer(cle, valeur, null, null);
 		} else {
-			if (cle < parent.getCle()) {
+			if (cle.compareTo(parent.getCle()) < 0) {
 				return Arbre.creer(parent.getCle(), parent.getValeur(), ajoutNoeudRecursif(cle, valeur, parent.getFilsGauche()), parent.getFilsDroit());
 			} else {
 				return Arbre.creer(parent.getCle(), parent.getValeur(), parent.getFilsGauche(), ajoutNoeudRecursif(cle, valeur, parent.getFilsDroit()));
@@ -31,7 +31,7 @@ public class Arbre {
 	//---------------------------
 	// Chercher version recursive
 	//---------------------------
-	public static Noeud chercherRecursif(int cle, Noeud courant) {
+	public static Noeud chercherRecursif(String cle, Noeud courant) {
 
 		// Au premier appel de la fonction
 		// noeud courant sera égal à la racine de l'arbre
@@ -44,11 +44,11 @@ public class Arbre {
 		} else {
 			// Si la clé correspond à la clé du nooeud
 			// on renvoie ce noeud
-			if (cle == courant.getCle()) {
+			if (cle.equals(courant.getCle())) {
 				return courant;
 				// Si la clé recherchée est inférieure à la clé du noeud
 				// On fourni le filsGauche
-			} else if (cle < courant.getCle()) {
+			} else if (cle.compareTo(courant.getCle()) < 0) {
 				return chercherRecursif(cle, courant.getFilsGauche());
 
 				// Sinon c'est que la clé recherchée est supérieure

@@ -32,13 +32,13 @@ public class CodageMorse {
 		try (Scanner sc = new Scanner(fichier);) {
 			
 			String[] element = sc.nextLine().split("#");
-			arbre_codage = Arbre.creer(element[0].charAt(0), element[1], null, null);
-			arbre_decodage = Arbre.creer(Integer.parseInt(element[1]), element[0], null, null);
+			arbre_codage = Arbre.creer(String.valueOf(element[0].charAt(0)), element[1], null, null);
+			arbre_decodage = Arbre.creer(String.valueOf(Integer.parseInt(element[1])), element[0], null, null);
 
 			while (sc.hasNextLine()) {
 				element = sc.nextLine().split("#");
-				arbre_codage = Arbre.ajoutNoeudRecursif(element[0].charAt(0), element[1], arbre_codage);
-				arbre_decodage = Arbre.ajoutNoeudRecursif(Integer.parseInt(element[1]), element[0], arbre_decodage);
+				arbre_codage = Arbre.ajoutNoeudRecursif(String.valueOf(element[0].charAt(0)), element[1], arbre_codage);
+				arbre_decodage = Arbre.ajoutNoeudRecursif(String.valueOf(Integer.parseInt(element[1])), element[0], arbre_decodage);
 			}
 			
 		} catch (FileNotFoundException ex) {
@@ -60,7 +60,7 @@ public class CodageMorse {
 				// On essaie de voir si le caractère est dans l'arbre et
 				// on récupère la valeur (code morse) dans temp
 				// (ex: pour 'G' on obtiendra "221" correspondant à --.).
-				String temp = Arbre.chercherRecursif(texte.charAt(i), arbre_codage).getValeur();
+				String temp = Arbre.chercherRecursif(String.valueOf(texte.charAt(i)), arbre_codage).getValeur();
 
 				// On converti le code sous forme de . et -
 				for (int j = 0; j < temp.length(); j++) {
@@ -111,7 +111,7 @@ public class CodageMorse {
 				// On essaie d'ajouter un caractère au resultat en effectuant une
 				// recherche dans l'arbre de décodage (on fourni une clé de la
 				// forme 1/2)
-				resultat += Arbre.chercherRecursif(Integer.parseInt(temp), arbre_decodage).getValeur();
+				resultat += Arbre.chercherRecursif(String.valueOf(Integer.parseInt(temp)), arbre_decodage).getValeur();
 			} catch (NumberFormatException e) {
 				// Si la recherche échoue, c'est qu'il s'agit d'un espace utilisé
 				// pour la séparation des mots ou en substitue si le caractère ne
@@ -133,10 +133,10 @@ public class CodageMorse {
 		Noeud resultat;
 		CodageMorse testCodage = new CodageMorse();
 
-		resultat = Arbre.chercherRecursif(22222, arbre_decodage);
+		resultat = Arbre.chercherRecursif(String.valueOf(22222), arbre_decodage);
 		System.out.println("Recherche Morse -> Texte : " + resultat);
 
-		resultat = Arbre.chercherRecursif('F', arbre_codage);
+		resultat = Arbre.chercherRecursif(String.valueOf('F'), arbre_codage);
 		System.out.println("Recherche Texte -> Morse : " + resultat);
 
 		System.out.println(testCodage.codage("Encore un autre test permettant de verifier que tout va bien."));
