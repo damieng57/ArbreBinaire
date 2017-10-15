@@ -6,12 +6,12 @@ package ArbreBinaire;
  * de METZ - 2017/2018
  *
  */
-public class Arbre {
+public class ArbreRecursif {
 
 
-	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
-		return Noeud.creer(cle, valeur, filsGauche, filsDroit);
-	}
+//	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
+//		return Noeud.creer(cle, valeur, filsGauche, filsDroit);
+//	}
 
 	//---------------------------
 	// Ajout noeud à la fin en version recursive
@@ -22,9 +22,9 @@ public class Arbre {
 			return Noeud.creer(cle, valeur, null, null);
 		} else {
 			if (cle.compareTo(parent.getCle()) < 0) {
-				return Arbre.creer(parent.getCle(), parent.getValeur(), ajoutNoeudRecursif(cle, valeur, parent.getFilsGauche()), parent.getFilsDroit());
+				return Noeud.creer(parent.getCle(), parent.getValeur(), ajoutNoeudRecursif(cle, valeur, parent.getFilsGauche()), parent.getFilsDroit());
 			} else {
-				return Arbre.creer(parent.getCle(), parent.getValeur(), parent.getFilsGauche(), ajoutNoeudRecursif(cle, valeur, parent.getFilsDroit()));
+				return Noeud.creer(parent.getCle(), parent.getValeur(), parent.getFilsGauche(), ajoutNoeudRecursif(cle, valeur, parent.getFilsDroit()));
 			}
 		}
 	}

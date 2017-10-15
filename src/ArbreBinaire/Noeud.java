@@ -8,6 +8,11 @@ package ArbreBinaire;
  */
 public class Noeud {
 
+	// --------------------------------------//
+	//		   DEFINITION D'UN NOEUD ET 
+	//		   DE SES FONCTIONS DE BASE
+	//  (Commun au algo itératif et récursif)
+	// --------------------------------------//
 	// Un noeud est caractérisé par sa clé et sa valeur
 	private String cle;
 	private String valeur;
@@ -20,14 +25,13 @@ public class Noeud {
 	public Noeud() {
 	}
 
-	// Constructeur du noeud pour la version recursive
+	// Constructeur du noeud
 	public Noeud(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		this.cle = cle;
 		this.valeur = valeur;
 		this.filsGauche = filsGauche;
 		this.filsDroit = filsDroit;
 	}
-
 
 	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		return new Noeud(cle, valeur, filsGauche, filsDroit);
@@ -67,10 +71,19 @@ public class Noeud {
 		return filsDroit;
 	}
 
+	// Les setters ne sont utiles que pour la version ArbreIteratif
 	/**
-	 * @param cle the cle to set
+	 * @param filsGauche the filsGauche to set
 	 */
-	public void setCle(String cle) {
-		this.cle = cle;
+	public void setFilsGauche(Noeud filsGauche) {
+		this.filsGauche = filsGauche;
 	}
+
+	/**
+	 * @param filsDroit the filsDroit to set
+	 */
+	public void setFilsDroit(Noeud filsDroit) {
+		this.filsDroit = filsDroit;
+	}
+
 }
