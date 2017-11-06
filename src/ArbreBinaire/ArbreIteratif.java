@@ -24,7 +24,7 @@ public class ArbreIteratif {
 
 		// Si la racine est vide, le nouveau noeud est la racine
 		// elle sera réutilisé lors de la recherche. On n'y touche plus!
-		if (racine == null) {
+		if (Noeud.estVide(racine)) {
 			racine = nouveauNoeud;
 
 			// Dans le cas contraire
@@ -106,7 +106,7 @@ public class ArbreIteratif {
 			// ou un filsDroit n'a pas été défini), le dernier noeud
 			// était une feuille, impossible d'aller plus loin.
 			// La clé demandée n'existe pas
-			if (courant == null) {
+			if (Noeud.estVide(courant)) {
 				return null;
 			}
 		}
@@ -130,7 +130,7 @@ public class ArbreIteratif {
 		Noeud courant = racine;
 		Noeud temp = null;
 
-		while (courant != null) {
+		while (!Noeud.estVide(courant)) {
 			temp = courant;
 			courant = courant.getFilsGauche();
 		}
@@ -152,7 +152,33 @@ public class ArbreIteratif {
 		Noeud courant = racine;
 		Noeud temp = null;
 
-		while (courant != null) {
+		while (!Noeud.estVide(courant)) {
+			temp = courant;
+			courant = courant.getFilsDroit();
+		}
+
+		return temp;
+	}
+	
+	//---------------------------
+	// Supprimer version iterative
+	//---------------------------
+	
+	public Noeud supprimer(String cle) {
+
+		// On recherche une valeur à l'aide de
+		// la fonction de recherche
+		
+		if (chercher(cle) == null){
+			return null;
+		} else {
+			
+		}
+		
+		Noeud courant = racine;
+		Noeud temp = null;
+
+		while (!Noeud.estVide(courant)) {
 			temp = courant;
 			courant = courant.getFilsDroit();
 		}
@@ -167,7 +193,7 @@ public class ArbreIteratif {
 	// Ordre préfixe
 	public void Prefixe(Noeud courant) {
 
-		if (courant != null) {
+		if (!Noeud.estVide(courant)) {
 
 			// On affiche le nom du noeud et sa clé lorsqu'on
 			// le rencontre la première fois

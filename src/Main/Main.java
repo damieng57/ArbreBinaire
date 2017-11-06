@@ -1,6 +1,5 @@
 package Main;
 
-import ArbreBinaire.Morse.CodageMorseIteratif;
 import Fonctions.ConvertTo;
 import Fonctions.ModeSelector;
 import Fonctions.Timer;
@@ -86,6 +85,8 @@ public class Main {
 		//		  EXEMPLE DE CONVERSION DE
 		//			CHAINE DE CARACTERE
 		// --------------------------------------//
+		ModeSelector.Mode.setMode(ModeSelector.Mode.ITERATIF);
+		
 		System.out.println(ConvertTo.textToMorse("Voulez-vous portez à ce vieux juge blond qui fume un whisky ? Je vous remercie."));
 		System.out.println(ConvertTo.morseToText("...- --- ..- .-.. . --.. -....- ...- --- ..- ...  .--. --- .-. "
 				+ "- . --..  .--.-  -.-. .  ...- .. . ..- -..-  .--- ..- --. .  -... .-.. --- -. -..  --.- ..- "

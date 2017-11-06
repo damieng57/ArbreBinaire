@@ -37,6 +37,10 @@ public class Noeud {
 		return new Noeud(cle, valeur, filsGauche, filsDroit);
 	}
 
+	public static boolean estVide(Noeud noeud) {
+		return (noeud == null);
+	}
+
 	// Affichage de la clé et de la valeur
 	@Override
 	public String toString() {

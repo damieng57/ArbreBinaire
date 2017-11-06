@@ -18,7 +18,7 @@ public class ArbreRecursif {
 	//---------------------------
 	public static Noeud ajoutNoeudRecursif(String cle, String valeur, Noeud parent) {
 
-		if (parent == null) {
+		if (Noeud.estVide(parent)) {
 			return Noeud.creer(cle, valeur, null, null);
 		} else {
 			if (cle.compareTo(parent.getCle()) < 0) {
@@ -39,7 +39,7 @@ public class ArbreRecursif {
 		// Si courant est null, cela voudra dire
 		// que l'on a atteint la fn d'une branche
 		// sans trouver de clé correspondante
-		if (courant == null) {
+		if (Noeud.estVide(courant)) {
 			return null;
 
 		} else {
@@ -71,7 +71,7 @@ public class ArbreRecursif {
 		// dans l'arbre toujours vers la gauche jusqu'à 
 		// arriver au dernier noeud qui sera celui avec 
 		// la plus petite valeur
-		if (courant.getFilsGauche() == null) {
+		if (Noeud.estVide(courant.getFilsGauche())) {
 			return courant;
 		} else {
 			return minRecursif(courant.getFilsGauche());
@@ -89,7 +89,7 @@ public class ArbreRecursif {
 		// dans l'arbre toujours vers la droite jusqu'à 
 		// arriver au dernier noeud qui sera celui avec 
 		// la plus grande valeur
-		if (courant.getFilsDroit() == null) {
+		if (Noeud.estVide(courant.getFilsDroit())) {
 			return courant;
 		} else {
 			return maxRecursif(courant.getFilsDroit());
@@ -104,7 +104,7 @@ public class ArbreRecursif {
 	// Ordre préfixe
 	public static void Prefixe(Noeud courant) {
 
-		if (courant != null) {
+		if (!Noeud.estVide(courant)) {
 			// On affiche le nom du noeud et sa clé lorsqu'on
 			// le rencontre la première fois
 			System.out.println(courant);

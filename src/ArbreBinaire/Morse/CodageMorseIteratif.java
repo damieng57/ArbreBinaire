@@ -124,7 +124,9 @@ public class CodageMorseIteratif {
 		System.out.println(result);
 
 		System.out.println(codage("Encore un autre test permettant de verifier que tout va bien 1234567890."));
-		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - .- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. .-.-.-"));
+		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - "
+				+ ".- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. "
+				+ ".-.-.-"));
 
 		System.out.println("\n*************\n");
 		arbre_codage_iteratif.Prefixe(arbre_codage_iteratif.getRacine());
