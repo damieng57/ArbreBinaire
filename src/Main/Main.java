@@ -1,5 +1,6 @@
 package Main;
 
+import ArbreBinaire.Morse.CodageMorseIteratif;
 import Fonctions.ConvertTo;
 import Fonctions.ModeSelector;
 import Fonctions.Timer;
@@ -14,7 +15,7 @@ import java.io.File;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		// --------------------------------------//
 		//		CHOIX DU MODE POUR L'ALGORITHME
 		//	   DE L'ARBRE BINAIRE - ICI RECURSIF
@@ -26,14 +27,14 @@ public class Main {
 		//				CLAIR -> MORSE
 		// --------------------------------------//
 		// Chargement du fichier à coder TexteClair.txt
-		File fichierEntreeClair = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/Extrait_Les_Miserables.txt");
+		File fichierEntreeClair = new File("./src/Ressources/Extrait_Les_Miserables.txt");
 		// Définition du fichier accueillant le texte en morse
-		File fichierSortieMorse = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/TexteMorse.txt");
+		File fichierSortieMorse = new File("./src/Ressources/TexteMorse.txt");
 
 		Timer.start();
 
 		ConvertTo.fileToMorse(fichierEntreeClair, fichierSortieMorse);
-		
+
 		System.out.println("Mode récursif : clair -> morse");
 		Timer.stopAndDisplay();
 
@@ -42,14 +43,14 @@ public class Main {
 		//				MORSE -> CLAIR
 		// --------------------------------------//
 		// Chargement du fichier à decoder TexteMorse.txt
-		File fichierEntreeMorse = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/TexteMorse.txt");
+		File fichierEntreeMorse = new File("./src/Ressources/TexteMorse.txt");
 		// Définition du fichier accueillant le texte décodé
-		File fichierSortieClair = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/TexteClair.txt");
+		File fichierSortieClair = new File("./src/Ressources/TexteClair.txt");
 
 		Timer.start();
 
 		ConvertTo.fileToText(fichierEntreeMorse, fichierSortieClair);
-		
+
 		System.out.println("Mode récursif : morse -> clair");
 		Timer.stopAndDisplay();
 
@@ -66,7 +67,7 @@ public class Main {
 		Timer.start();
 
 		ConvertTo.fileToMorse(fichierEntreeClair, fichierSortieMorse);
-		
+
 		System.out.println("Mode itératif : clair -> morse");
 		Timer.stopAndDisplay();
 
@@ -77,7 +78,7 @@ public class Main {
 		Timer.start();
 
 		ConvertTo.fileToText(fichierEntreeMorse, fichierSortieClair);
-		
+
 		System.out.println("Mode itératif : morse -> clair");
 		Timer.stopAndDisplay();
 
@@ -86,14 +87,14 @@ public class Main {
 		//			CHAINE DE CARACTERE
 		// --------------------------------------//
 		ModeSelector.Mode.setMode(ModeSelector.Mode.ITERATIF);
-		
+
 		System.out.println(ConvertTo.textToMorse("Voulez-vous portez à ce vieux juge blond qui fume un whisky ? Je vous remercie."));
 		System.out.println(ConvertTo.morseToText("...- --- ..- .-.. . --.. -....- ...- --- ..- ...  .--. --- .-. "
 				+ "- . --..  .--.-  -.-. .  ...- .. . ..- -..-  .--- ..- --. .  -... .-.. --- -. -..  --.- ..- "
 				+ "..  ..-. ..- -- .  ..- -.  .-- .... .. ... -.- -.--  ..--..  .--- .  ...- --- ..- ...  .-. . "
 				+ "-- . .-. -.-. .. . .-.-.-"));
-		
-		
 
+		
+		CodageMorseIteratif.TestCodage();
 	}
 }

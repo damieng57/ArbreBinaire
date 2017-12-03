@@ -88,7 +88,6 @@ public class ArbreIteratif {
 		// Tant que la clé fournie ne correspond
 		// pas à la clé du noeud courant, on
 		// continue de boucler
-		
 		while (!cle.equals(courant.getCle())) {
 
 			// Si la clé fournie est inférieure
@@ -159,23 +158,20 @@ public class ArbreIteratif {
 
 		return temp;
 	}
-	
-	//---------------------------
-	// Supprimer version iterative
-	//---------------------------
-	
-	public Noeud supprimer(String cle) {
 
-		// On recherche une valeur à l'aide de
-		// la fonction de recherche
-		
-		if (chercher(cle) == null){
-			return null;
-		} else {
-			
-		}
-		
-		Noeud courant = racine;
+	//---------------------------
+	// Maximum version iterative
+	//---------------------------
+	// Version surchargée pour la suppression
+	public Noeud max(Noeud sousArbre) {
+
+		// On constate la propriété suivante
+		// Si le noeud filsDroit à forcement une
+		// clé supérieure à son parent, il suffit d'itérer
+		// dans l'arbre toujours vers la droite jusqu'à 
+		// arriver au dernier noeud qui sera celui avec 
+		// la plus grande valeur
+		Noeud courant = sousArbre;
 		Noeud temp = null;
 
 		while (!Noeud.estVide(courant)) {
@@ -191,7 +187,7 @@ public class ArbreIteratif {
 	//---------------------------
 	// Permet de parcourir l'ensemble des noeuds
 	// Ordre préfixe
-	public void Prefixe(Noeud courant) {
+	public void prefixe(Noeud courant) {
 
 		if (!Noeud.estVide(courant)) {
 
@@ -199,11 +195,95 @@ public class ArbreIteratif {
 			// le rencontre la première fois
 			System.out.println(courant);
 
-			Prefixe(courant.getFilsGauche());
-			Prefixe(courant.getFilsDroit());
+			prefixe(courant.getFilsGauche());
+			prefixe(courant.getFilsDroit());
 
 		}
 
 	}
 
+	//---------------------------
+	// Supprimer version iterative
+	//---------------------------
+	public Noeud supprimer(String cle, Noeud courant) {
+
+		// On défini le noeud de départ comme étant la racine
+		courant = this.racine;
+		Noeud parent = null;
+		boolean flag = false;
+
+		// On teste, si la clé du noeud courant n'est pas la clé recherchée
+		while (!cle.equals(courant.getCle())) {
+
+			// Si la clé est inférieure, on sélectionne le fils gauche
+			if (cle.compareTo(courant.getCle()) < 0) {
+				// Le noeud courant devient le noeud parent
+				parent = courant;
+				// On défini le fils gauche comme le nouveau noeud
+				// à tester et on reboucle.
+				courant = courant.getFilsGauche();
+				// On met un flag pour se rappeler que le parent est dans le noeud
+				// de droite (fils droit)
+				flag = false;
+
+				// Si la clé est supérieure, on sélectionne le fils droit
+			} else if (cle.compareTo(courant.getCle()) > 0) {
+				// Le noeud courant devient le noeud parent
+				parent = courant;
+				// On défini le fils droit comme le nouveau noeud
+				// à tester et on reboucle.
+				courant = courant.getFilsDroit();
+				// On met un flag pour se rappeler que le parent est dans le noeud
+				// de droite (fils droit)
+				flag = true;
+			} else {
+				// Si aucune condition n'est rempli,
+				// alors la clé n'existe pas
+				return null;
+			}
+		}
+
+		// On a localisé le noeud à supprimer
+		// Si pas de fils droit ou gauche, on supprime le noeud
+		if (courant.getFilsDroit() == null && courant.getFilsGauche() == null) {
+			courant = null;
+			// Si le fils droit n'est pas null mais le fils gauche n'existe pas
+		} else if (courant.getFilsDroit() != null && courant.getFilsGauche() == null) {
+			// Le fils droit devient le noeud courant
+			courant = courant.getFilsDroit();
+			// Si le fils gauche n'est pas null mais le fils droit n'existe pas
+		} else if (courant.getFilsDroit() == null && courant.getFilsGauche() != null) {
+			// Le fils droit devient le noeud courant
+			courant = courant.getFilsGauche();
+			// Si aucune des conditions précédentes n'est vérifiée, c'est qu'il y deux fils
+		} else {
+			// On prend le max du fils gauche
+			Noeud temp = max(courant.getFilsGauche());
+			
+			// Avant d'ajouter les fils du noeud à supprimer
+			// On supprime le noeud de remplacement dans les fils
+			// Sinon, il sera présent deux fois dans l'arbre !!!
+			supprimer(temp.getCle(), courant);
+			
+			// On ajoute le sous-arbre droit du noeud à supprimer
+			// au noeud de remplacement
+			temp.setFilsDroit(courant.getFilsDroit());
+			// On ajoute le sous-arbre gauche du noeud à supprimer
+			// au noeud de remplacement
+			temp.setFilsGauche(courant.getFilsGauche());
+			// Et on remplace le noeud à supprimer par le noeud
+			// qui le remplace
+			courant = temp;
+		}
+
+		// On "raccroche" les éléments au parent du noeud supprimé
+		// Soit au fils Gauche, soit au fils Droit
+		if (flag) {
+			parent.setFilsDroit(courant);
+		} else {
+			parent.setFilsGauche(courant);
+		}
+
+		return parent;
+	}
 }

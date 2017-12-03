@@ -102,17 +102,77 @@ public class ArbreRecursif {
 	// Utilisation de la récursivité
 	// pour parcourir l'ensemble des noeuds
 	// Ordre préfixe
-	public static void Prefixe(Noeud courant) {
+	public static void prefixe(Noeud courant) {
 
 		if (!Noeud.estVide(courant)) {
 			// On affiche le nom du noeud et sa clé lorsqu'on
 			// le rencontre la première fois
 			System.out.println(courant);
 
-			Prefixe(courant.getFilsGauche());
-			Prefixe(courant.getFilsDroit());
+			prefixe(courant.getFilsGauche());
+			prefixe(courant.getFilsDroit());
 		}
 
+	}
+	
+	// A FINALISER
+	
+	//---------------------------
+	// Supprimer version recursif
+	//---------------------------
+	public void supprimerRecursif(String cle, Noeud courant) {
+
+		// On demarre de la racine (défini lors
+		// de la construction de l'arbre)
+		if (courant == null) {
+			// Arbre vide ou valeur non trouvée
+			System.out.println("L'arbre est vide ou la clé n'existe pas");
+
+		} else {
+			if (cle.equals(courant.getCle())) {
+
+				// Si pas de fils droit ou gauche, on supprime le noeud
+				if (courant.getFilsDroit() == null && courant.getFilsGauche() == null) {
+					courant = null;
+					// Si le fils droit n'est pas null mais le fils gauche n'existe pas
+				} else if (courant.getFilsDroit() != null && courant.getFilsGauche() == null) {
+					// Le fils droit devient le noeud courant
+					courant = courant.getFilsDroit();
+					// Si le fils gauche n'est pas null mais le fils droit n'existe pas
+				} else if (courant.getFilsDroit() == null && courant.getFilsGauche() != null) {
+					// Le fils droit devient le noeud courant
+					courant = courant.getFilsGauche();
+					// Si aucune des conditions précédentes n'est vérifiée, c'est qu'il y deux fils
+				} else {
+					// On prend le max du fils gauche
+					Noeud maxFilsGauche = maxRecursif(courant.getFilsGauche());
+					// On lui ajout le sous-arbre droit comme fils
+					maxFilsGauche.setFilsDroit(courant.getFilsDroit());
+					// Puis le sous-arbre gauche
+					maxFilsGauche.setFilsGauche(courant.getFilsGauche());
+					// Et on remplace le noeud à supprimer par le maxFilsGauche
+					courant = maxFilsGauche;
+					maxFilsGauche = null;
+
+					// NOTA : On aurait pu faire avec la meêm en cherchant le
+					// mini de l'arbre droit
+				}
+			} else {
+
+				// Si la clé fournie est inférieure
+				// à la clé du noeud courant...
+				if (cle.compareTo(courant.getCle()) < 0) {
+					// ...c'est le filsGauche qui devient
+					// le noeud courant à tester...
+					supprimerRecursif(cle, courant.getFilsGauche());
+				} else {
+					// ...sinon, c'est le filsDroit qui devient
+					// le noeud courant à tester
+					supprimerRecursif(cle, courant.getFilsDroit());
+				}
+
+			}
+		}
 	}
 
 }

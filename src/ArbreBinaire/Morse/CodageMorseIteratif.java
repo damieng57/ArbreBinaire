@@ -28,7 +28,8 @@ public class CodageMorseIteratif {
 		Timer.start();
 
 		// Chargement du fichier de codage Morse.txt
-		File fichier = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/Morse.txt");
+		// On crée l'arbre une seule fois
+		File fichier = new File("./src/Ressources/Morse.txt");
 
 		try (Scanner sc = new Scanner(fichier);) {
 
@@ -123,12 +124,17 @@ public class CodageMorseIteratif {
 		result = arbre_codage_iteratif.chercher("E");
 		System.out.println(result);
 
-		System.out.println(codage("Encore un autre test permettant de verifier que tout va bien 1234567890."));
-		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - "
-				+ ".- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. "
-				+ ".-.-.-"));
+		System.out.println(codage("1234567890"));
+//		System.out.println(codage("Encore un autre test permettant de verifier que tout va bien 1234567890."));
+//		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - "
+//				+ ".- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. "
+//				+ ".-.-.-"));
 
 		System.out.println("\n*************\n");
-		arbre_codage_iteratif.Prefixe(arbre_codage_iteratif.getRacine());
+		arbre_codage_iteratif.prefixe(arbre_codage_iteratif.getRacine());
+		System.out.println("\n*************\n");
+		arbre_codage_iteratif.supprimer("5", arbre_codage_iteratif.getRacine());
+		arbre_codage_iteratif.prefixe(arbre_codage_iteratif.getRacine());
+		
 	}
 }

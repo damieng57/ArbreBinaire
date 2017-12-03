@@ -33,6 +33,14 @@ public class Noeud {
 		this.filsDroit = filsDroit;
 	}
 
+	public void setCle(String cle) {
+		this.cle = cle;
+	}
+
+	public void setValeur(String valeur) {
+		this.valeur = valeur;
+	}
+
 	public static Noeud creer(String cle, String valeur, Noeud filsGauche, Noeud filsDroit) {
 		return new Noeud(cle, valeur, filsGauche, filsDroit);
 	}

@@ -28,7 +28,7 @@ public class CodageMorseRecursif {
 		Timer.start();
 
 		// Chargement du fichier de codage Morse.txt
-		File fichier = new File("/Users/Damien/Documents/workspace/Java/ArbreBinaire/src/Ressources/Morse.txt");
+		File fichier = new File("./src/Ressources/Morse.txt");
 
 		try (Scanner sc = new Scanner(fichier);) {
 
