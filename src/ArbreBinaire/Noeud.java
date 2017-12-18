@@ -55,6 +55,9 @@ public class Noeud {
 		return ("La clé : " + getCle() + " a pour valeur associée : " + getValeur());
 	}
 
+	
+	// Les getters
+	
 	/**
 	 * @return cle
 	 */
@@ -83,7 +86,7 @@ public class Noeud {
 		return filsDroit;
 	}
 
-	// Les setters ne sont utiles que pour la version ArbreIteratif
+	// Les setters
 	/**
 	 * @param filsGauche the filsGauche to set
 	 */

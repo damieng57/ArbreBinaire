@@ -124,16 +124,16 @@ public class CodageMorseIteratif {
 		result = arbre_codage_iteratif.chercher("E");
 		System.out.println(result);
 
-		System.out.println(codage("1234567890"));
-//		System.out.println(codage("Encore un autre test permettant de verifier que tout va bien 1234567890."));
-//		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - "
-//				+ ".- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. "
-//				+ ".-.-.-"));
+		System.out.println(codage("Encore un autre test permettant de verifier que tout va bien 1234567890."));
+		System.out.println(decodage(". -. -.-. --- .-. .  ..- -.  .- ..- - .-. .  - . ... -  .--. . .-. -- . - - "
+				+ ".- -. -  -.. .  ...- . .-. .. ..-. .. . .-.  --.- ..- .  - --- ..- -  ...- .-  -... .. . -. "
+				+ ".-.-.-"));
 
-		System.out.println("\n*************\n");
+		System.out.println("\n******Afficher l'intégralité de l'arbre*******\n");
 		arbre_codage_iteratif.prefixe(arbre_codage_iteratif.getRacine());
-		System.out.println("\n*************\n");
+		
 		arbre_codage_iteratif.supprimer("5", arbre_codage_iteratif.getRacine());
+		System.out.println("\n******Afficher l'arbre binaire après suppression d'une valeur (ici 5)*******\n");
 		arbre_codage_iteratif.prefixe(arbre_codage_iteratif.getRacine());
 		
 	}

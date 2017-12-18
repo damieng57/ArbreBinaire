@@ -50,7 +50,7 @@ public class ConvertTo {
 	// --------------------------------------//
 	//			FICHIER CLAIR->MORSE
 	// Lecture du fichier en clair et conversion
-	// en vers le fichier Morse
+	// vers le fichier Morse
 	// --------------------------------------//
 	public static String fileToMorse(File fichierEntreeClair, File fichierSortieMorse) {
 		// Variable temporaire
@@ -85,7 +85,7 @@ public class ConvertTo {
 	// --------------------------------------//
 	//			FICHIER MORSE->CLAIR
 	// Lecture du fichier en Morse et conversion
-	// en vers le fichier TexteClair
+	// vers le fichier TexteClair
 	// --------------------------------------//
 	public static String fileToText(File fichierEntreeMorse, File fichierSortieClair) {
 		// Variable temporaire
